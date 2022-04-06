@@ -10,6 +10,10 @@ mysql> desc employeee;
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
+
+
+1) Add a column ‘SSN’ at the first position in the table EMPLOYEE
+
 mysql> alter table employeee add SSN int first;
 Query OK, 0 rows affected (0.57 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -26,6 +30,11 @@ mysql> desc employeee;
 | adhar_no | int(11)     | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
+
+
+
+
+2) Change the data type of the column ‘DOB’  in year the table EMPLOYEE    
 
 mysql> alter table employeee modify dob year;
 Query OK, 0 rows affected (1.36 sec)mysql> alter table student1 add constraint c3 unique(SSN),add constraint c2 unique(adhar_no);
@@ -60,6 +69,9 @@ mysql> desc employeee;
 +----------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
 
+
+3.    Delete the column ‘emp_id’ the table EMPLOYEE.
+
 mysql> alter table employeee drop emp_id;
 Query OK, 0 rows affected (0.58 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -77,6 +89,9 @@ mysql> desc employeee;
 5 rows in set (0.00 sec)
 
 
+
+4.    Add  the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE
+
 mysql> alter table employeee add constraint c1 unique(SSN,adhar_no);
 Query OK, 0 rows affected (0.74 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -92,6 +107,9 @@ mysql> desc employeee;
 | adhar_no | int(11)     | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
+6.    Change the table name EMPLOYEE as PERSON
 
 mysql> alter table employeee rename to person;
 Query OK, 0 rows affected (0.12 sec)
@@ -125,6 +143,7 @@ mysql> desc student1;
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.01 sec)
 
+5.    Delete the NULL constraint of ‘age’ in the STUDENT table.
 
 mysql> alter table stdu modify age int null;
 Query OK, 0 rows affected (0.51 sec)
@@ -143,6 +162,10 @@ mysql> desc stdu;
 5 rows in set (0.00 sec)
 
 mysql> 
+
+
+
+
 mysql> alter table student1 add constraint c3 unique(SSN),add constraint c2 unique(adhar_no);
 Query OK, 0 rows affected (0.61 sec)
 Records: 0  Duplicates: 0  Warnings: 0
