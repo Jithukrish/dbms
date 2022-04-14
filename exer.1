@@ -48,7 +48,7 @@ mysql> desc stdu;
 
 
 
-mysql> alter table stdu add primary key(roll_no);
+mysql> alter table stdu add primary key(roll_no);  //USE CREATE COMMAND ONLY
 Query OK, 0 rows affected (0.99 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -72,7 +72,7 @@ mysql> desc stdu;
 
 
 
-mysql> alter table stdu modify name varchar(20) not null;
+mysql> alter table stdu modify name varchar(20) not null;  //USE CREATE COMMAND ONLY
 Query OK, 0 rows affected (1.02 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -302,7 +302,7 @@ mysql> desc invoice_itemm;
 
 
 
- mysql> alter table stdu add check(0<age<99);
+ mysql> alter table stdu add check(0<age<99);   //USE CREATE COMMAND ONLY
 Query OK, 0 rows affected (0.52 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -320,4 +320,6 @@ mysql> desc stdu;
 
 mysql> 
 
+
+//EXP:1 IS DDL-CREATE--USE CREATE COMMAND ONLY
 
