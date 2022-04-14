@@ -210,7 +210,7 @@ mysql> select * from invoice_itemm;
 +--------+------+----------+
 5 rows in set (0.00 sec)
 
-mysql> 
+mysql> //ONE CUSTOMER CAN BUY MORE THAN ONE ITEMS...UPDATE INVOICE-ITEM TABLE
 
 
 
@@ -308,3 +308,6 @@ mysql> select * from stdu;
 
 mysql> 
 
+
+
+//UPDATE INVOICE-ITEM TABLE
