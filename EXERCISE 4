@@ -1,0 +1,275 @@
+
+-------------------------------------------------------------EXPERIMENT 4---------------------------------------------------------------------
+
+-----------------------------------------Update the price of a particular product.--------------------------------------------------------------
+
+
+
+
+mysql> select * from prdt;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+|  131 | iphone    | 12000 |
+|  132 | backcover |   100 |
+|  133 | chip      |    70 |
+|  134 | harddisk  |  7000 |
+|  135 | speaker   |  8000 |
++------+-----------+-------+
+5 rows in set (0.02 sec)
+
+mysql> update product set price=15000 where p_id=131;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set price=300 where p_id=132;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set price=100 where p_id=133;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set price=1000 where p_id=134;
+Query OK, 1 row affected (0.46 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set price=8752 where p_id=135;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from prdt;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+|  131 | iphone    | 12000 |
+|  132 | backcover |   100 |
+|  133 | chip      |    70 |
+|  134 | harddisk  |  7000 |
+|  135 | speaker   |  8000 |
++------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update product set price=15000 where p_id=131;
+Query OK, 0 rows affected (0.05 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update prdt set price=15000 where p_id=131;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update prdt set price=300 where p_id=132;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update prdt set price=100 where p_id=133;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update prdt set price=1000 where p_id=134;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update prdt set price=8752 where p_id=135;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from prdt;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+|  131 | iphone    | 15000 |
+|  132 | backcover |   300 |
+|  133 | chip      |   100 |
+|  134 | harddisk  |  1000 |
+|  135 | speaker   |  8752 |
++------+-----------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+------------------------------Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table--------------------------------------------
+
+
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+------------+
+| cust_id | name   | address        | city      | ph_no      |
++---------+--------+----------------+-----------+------------+
+|       1 | arjun  | kalamasseri    | wayanad   | 9765878763 |
+|       2 | arun   | pazhayath      | kozhikode | 9765878723 |
+|       3 | aleena | mattathil      | tvm       | 9765878724 |
+|       4 | george | puthiyaveettil | ekm       | 9765878774 |
+|       5 | amal   | pottekkad      | kollam    |            |
++---------+--------+----------------+-----------+------------+
+5 rows in set (0.01 sec)
+
+
+
+
+
+
+
+
+
+
+
+--------------------------Change the address, city, phone number of a particular customer.-----------------------------------------------------
+
+mysql> update cust set city='kollam' where cust_id=1;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+------------+
+| cust_id | name   | address        | city      | ph_no      |
++---------+--------+----------------+-----------+------------+
+|       1 | arjun  | kalamasseri    | kollam    | 9765878763 |
+|       2 | arun   | pazhayath      | kozhikode | 9765878723 |
+|       3 | aleena | mattathil      | tvm       | 9765878724 |
+|       4 | george | puthiyaveettil | ekm       | 9765878774 |
+|       5 | amal   | pottekkad      | kollam    |            |
++---------+--------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update cust set city='kottayam' where cust_id=1;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update cust set address='vaduvanjal' where cust_id=2;
+Query OK, 1 row affected (0.45 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update cust set ph_no='9747683368' where cust_id=3;
+Query OK, 1 row affected (0.46 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+------------+
+| cust_id | name   | address        | city      | ph_no      |
++---------+--------+----------------+-----------+------------+
+|       1 | arjun  | kalamasseri    | kottayam  | 9765878763 |
+|       2 | arun   | vaduvanjal     | kozhikode | 9765878723 |
+|       3 | aleena | mattathil      | tvm       | 9747683368 |
+|       4 | george | puthiyaveettil | ekm       | 9765878774 |
+|       5 | amal   | pottekkad      | kollam    |            |
++---------+--------+----------------+-----------+------------+
+5 rows in set (0.01 sec)
+
+
+Database changed
+mysql> select * from cust;
++---------+--------+----------------+---------+------------+
+| cust_id | name   | address        | city    | ph_no      |
++---------+--------+----------------+---------+------------+
+|       1 | arjun  | kalamasseri    | wayanad | 9765878763 |
+|       2 | arun   | pazhayath      | kkd     | 9765878723 |
+|       3 | aleena | mattathil      | tvm     | 9765878724 |
+|       4 | george | puthiyaveettil | ekm     | 9765878774 |
+|       5 | amal   | pottekkad      | kollam  |            |
++---------+--------+----------------+---------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+-----------------------Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table.----------------------------------------------
+
+
+
+mysql> update cust set city='kozhikode' where cust_id=2;
+Query OK, 1 row affected (0.47 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+------------+
+| cust_id | name   | address        | city      | ph_no      |
++---------+--------+----------------+-----------+------------+
+|       1 | arjun  | kalamasseri    | wayanad   | 9765878763 |
+|       2 | arun   | pazhayath      | kozhikode | 9765878723 |
+|       3 | aleena | mattathil      | tvm       | 9765878724 |
+|       4 | george | puthiyaveettil | ekm       | 9765878774 |
+|       5 | amal   | pottekkad      | kollam    |            |
++---------+--------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+
+------------------------------------ Update all prices with 2% of its original price.---------------------------------------------------------
+
+
+
+mysql> update prdt set price=price*(2/100);
+Query OK, 5 rows affected (0.45 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from prdt;
++------+-----------+--------+
+| p_id | p_name    | price  |
++------+-----------+--------+
+|  131 | iphone    |    300 |
+|  132 | backcover |      6 |
+|  133 | chip      |      2 |
+|  134 | harddisk  |     20 |
+|  135 | speaker   | 175.04 |
++------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+
+
+ ---------------------------------Change the quantity of a purchased product of inv_id ‘101’----------------------------------------------------
+
+mysql> mysql> update invoice_itemm set quantity=23 where inv_id=1006;
+Query OK, 2 rows affected (0.06 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        3 |
+|   1006 |  131 |       23 |
+|   1007 |  132 |        5 |
+|   1008 |  133 |        1 |
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  133 |       22 |
+|   1005 |  131 |        4 |
+|   1006 |  133 |       23 |
+|   1007 |  134 |        6 |
+|   1008 |  134 |        6 |
++--------+------+----------+
+13 rows in set (0.00 sec)
+
+mysql> update invoice_itemm set quantity=9 where inv_id=1004;
+Query OK, 3 rows affected (0.07 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        9 |
+|   1005 |  131 |        3 |
+|   1006 |  131 |       23 |
+|   1007 |  132 |        5 |
+|   1008 |  133 |        1 |
+|   1004 |  131 |        9 |
+|   1004 |  131 |        9 |
+|   1005 |  132 |       20 |
+|   1005 |  133 |       22 |
+|   1005 |  131 |        4 |
+|   1006 |  133 |       23 |
+|   1007 |  134 |        6 |
+|   1008 |  134 |        6 |
++--------+------+----------+
+13 rows in set (0.00 sec)
+
+mysql> 
+
+
+
