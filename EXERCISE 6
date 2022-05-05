@@ -1,0 +1,521 @@
+1.      List all customer details.
+
+
+2.      List pname, price of all products.
+
+
+3.      List all invoice items, avoid duplicates.
+
+
+4.      List product price between 50rs and 150rs
+
+
+5.      List the customer details who lives in ‘ekm’,’tvm’.
+
+
+6.      List the invoice details from 1st January 2021 to 31st march2021
+
+
+7.      List the customer details who not live in ‘tvm’.
+
+
+8.       List the customers who have no phone number.
+
+
+9.      Display customer names in descending order.
+
+
+10.   Display the customer details sorted in ascending by city and descending by names.
+
+
+11.   Find the customer names start with ‘A’.
+
+
+12.   Find the customer names who have ‘e’ or ‘a’ in them.
+
+
+13.   Find the customer names who have at least 3 characters.
+
+
+14.   List the names of customers their names have ‘r’ in second position.
+
+
+15.   Find the customer names start with ‘a’ and are at least 3 characters in length.
+
+
+--------------------------------------QUESTION 1----------------------------------------------------------------------------------------
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address       mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+---------------------------------------------------QUESTION 7--------------------------------------------------------------------------
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address       mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+
+mysql> select*from cust where Ph_no is NULL;
++---------+--------+-----------+-------+-------+
+| cust_id | name   | address   | city  | ph_no |
++---------+--------+-----------+-------+-------+
+|       6 | midhun | mattathil | vavad |  NULL |
++---------+--------+-----------+-------+-------+
+1 row in set (0.00 sec)
+
+
+-----------------------------------------------QUESTION 2----------------------------------------------------------------------------------
+mysql> select * from prdt;
++------+-----------+----------+
+| p_id | p_name    | price    |
++------+-----------+----------+
+|  131 | iphone    | 15300.00 |
+|  132 | backcover |   102.00 |
+|  133 | chip      |    71.40 |
+|  134 | harddisk  |  7140.00 |
+|  135 | speaker   |  8160.00 |
++------+-----------+----------+
+5 rows in set (0.01 sec)
+
+mysql> select p_name,price from prdt;
++-----------+----------+
+| p_name    | price    |
++-----------+----------+
+| iphone    | 15300.00 |
+| backcover |   102.00 |
+| chip      |    71.40 |
+| harddisk  |  7140.00 |
+| speaker   |  8160.00 |
++-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
+------------------------------------------------------QUESTION 3--------------------------------------------------------------------------
+
+
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
+|   1006 |  132 |        5 |
+|   1007 |  133 |        5 |
+|   1008 |  134 |        6 |
+|   1008 |  135 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select distinct inv_id from invoice_itemm;
++--------+
+| inv_id |
++--------+
+|   1004 |
+|   1005 |
+|   1006 |
+|   1007 |
+|   1008 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> 
+----------------------------------------------------------QUESTION 4-----------------------------------------------------------
+
+
+
+mysql> select * from prdt;
++------+-----------+----------+
+| p_id | p_name    | price    |
++------+-----------+----------+
+|  131 | iphone    | 15300.00 |
+|  132 | backcover |   102.00 |
+|  133 | chip      |    71.40 |
+|  134 | harddisk  |  7140.00 |
+|  135 | speaker   |  8160.00 |
++------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from prdt
+    -> where price between 50 and 150;
++------+-----------+--------+
+| p_id | p_name    | price  |
++------+-----------+--------+
+|  132 | backcover | 102.00 |
+|  133 | chip      |  71.40 |
++------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
+
+-----------------------------------------------------QUESTION 5----------------------------------------------------------------------------
+
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
++---------+--------+----------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from cust where city in('ekm','tvm');
++---------+--------+----------------+------+-----------+
+| cust_id | name   | address        | city | ph_no     |
++---------+--------+----------------+------+-----------+
+|       3 | aleena | mattathil      | tvm  | 974768368 |
+|       4 | george | puthiyaveettil | ekm  |  97754433 |
++---------+--------+----------------+------+-----------+
+2 rows in set (0.00 sec)
+
+
+
+---------------------------------------------------------QUESTION 6----------------------------------------------------------------------
+
+mysql> select*from invoice_mas;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2021-01-01 |
+|   1005 |       2 | 2022-01-03 |
+|   1006 |       3 | 2022-01-04 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from invoice_mas where inv_date between '2021-01-01' and '2022-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2021-01-01 |
+|   1005 |       2 | 2022-01-03 |
+|   1006 |       3 | 2022-01-04 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> 
+-----------------------------------------------------------QUESTION 7--------------------------------------------------------------------
+
+
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
++---------+--------+----------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from cust where city not in('tvm');
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
++---------+--------+----------------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+--------------------------------------------------QUESTION 9----------------------------------------------------------------------------
+
+
+
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select *from cust 
+    -> order by name desc;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+mysql> select name from cust  order by name desc;
++--------+
+| name   |
++--------+
+| midhun |
+| george |
+| arun   |
+| arjun  |
+| amal   |
+| aleena |
+| AJU    |
++--------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+----------------------------------------------------QUESTION 10-------------------------------------------------------------------------
+
+
+
+
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+mysql> select *from cust  order by city, name desc;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+m
+
+
+
+------------------------------------------------QUESTION 11----------------------------------------------------------------------------
+
+mysql> select *from cust
+    -> ;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select *from cust where name like'a%';
++---------+--------+-------------+-----------+-----------+
+| cust_id | name   | address     | city      | ph_no     |
++---------+--------+-------------+-----------+-----------+
+|       1 | arjun  | kalamasseri | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal  | kozhikode | 976587823 |
+|       3 | aleena | mattathil   | tvm       | 974768368 |
+|       5 | amal   | pottekkad   | kollam    | 974733789 |
+|       7 | AJU    | matta       | KODUVALLY |  93537946 |
++---------+--------+-------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
+---------------------------------------------------QUESTION 12-----------------------------------------------------------------------------
+
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> select name from cust where name like '%a%' or name like '%e%';
++--------+
+| name   |
++--------+
+| arjun  |
+| arun   |
+| aleena |
+| george |
+| amal   |
+| AJU    |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> 
+
+
+------------------------------------------------QUESTION 13-----------------------------------------------------------------------------
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select name from cust where length(name)!=3;
++--------+
+| name   |
++--------+
+| arjun  |
+| arun   |
+| aleena |
+| george |
+| amal   |
+| midhun |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> 
+
+------------------------------------------------QUESTION 14--------------------------------------------------------------------------------
+
+
+
+
+
+mysql> select*from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> select *from cust where name like'_r%';
++---------+-------+-------------+-----------+-----------+
+| cust_id | name  | address     | city      | ph_no     |
++---------+-------+-------------+-----------+-----------+
+|       1 | arjun | kalamasseri | kollam    | 976587863 |
+|       2 | arun  | vaduvanjal  | kozhikode | 976587823 |
++---------+-------+-------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> 
+-------------------------------------------------QUESTION 15-----------------------------------------------------------------------------
+
+
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select name from cust where name like 'a__%';
++--------+
+| name   |
++--------+
+| arjun  |
+| arun   |
+| aleena |
+| amal   |
+| AJU    |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
