@@ -82,7 +82,7 @@ mysql> select * from invoice_itemm;
 +--------+------+----------+
 5 rows in set (0.00 sec)
 
-mysql> delete from invoice_itemm where inv_id=1007;
+mysql> delete from invoice_itemm where inv_id=1007; //WRONG
 Query OK, 1 row affected (0.06 sec)
 
 mysql> select * from invoice_itemm;
@@ -211,3 +211,4 @@ mysql> select * from cust;
 mysql> 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+//CORRECTION
