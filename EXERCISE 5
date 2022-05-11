@@ -1,0 +1,228 @@
+1. Delete the record of customer id ‘10001’.
+2. Delete all purchase details of items its quantity less than 2.
+3. Delete the purchase details of product ‘pen’ in the in_id ‘101’.
+4. Delete details of employees who does not have phone number.
+5. Delete all records from STUDENT table.
+6. Delete Invoice details of a particular customer.
+7. Delete the first two records of INVOICE_ITEM table its purchase quantity is high.
+
+
+-------------------------Delete details of employees who does not have phone number------------------------------------------------
+mysql> select *from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | parakkal       | kasargod  |      NULL |
++---------+--------+----------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+
+mysql> delete from cust where ph_no is NULL;
+Query OK, 1 row affected (0.44 sec)
+
+mysql> select *from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
++---------+--------+----------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+---------------------------------------Delete all purchase details of items its quantity less than 2---------------------------------------
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  131 |        4 |
+|   1006 |  133 |        1 |
+|   1007 |  134 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+
+mysql> delete from invoice_itemm where quantity<2;
+Query OK, 1 row affected (0.70 sec)
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  131 |        4 |
+|   1007 |  134 |        6 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+-------------------------------------------------------Delete the purchase details of product ‘pen’ in the in_id ‘1007’.--------------------
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  131 |        4 |
+|   1007 |  134 |        6 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> delete from invoice_itemm where inv_id=1007 and p_id=134;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  131 |        4 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+------------------Delete all records from STUDENT table.------------------------------------------------------------------------------------
+
+mysql> select * from stdu;
++---------+--------+------+----------+--------+
+| roll_no | name   | age  | address  | gender |
++---------+--------+------+----------+--------+
+|       1 | midhun |   21 | mattam   | m      |
+|       2 | junaid |   21 | kotta    | m      |
+|       3 | sanan  |   21 | pzhs     | m      |
+|       4 | abin   |   21 | puthiyat | m      |
+|       5 | anand  |   21 | vazhel   | m      |
++---------+--------+------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> delete from stdu;
+Query OK, 5 rows affected (0.04 sec)
+
+mysql> select * from stdu;
+Empty set (0.00 sec)
+
+
+
+--------------------------------------Delete Invoice details of a particular customer.------------------------------------------------------
+
+
+
+mysql> select * from invoice_mas;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2022-01-02 |
+|   1005 |       2 | 2022-01-03 |
+|   1006 |       3 | 2022-01-04 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
+|   1009 |       6 | 2022-06-03 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from invoice_mas where cust_id=6;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from invoice_mas;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2022-01-02 |
+|   1005 |       2 | 2022-01-03 |
+|   1006 |       3 | 2022-01-04 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
++--------+---------+------------+
+5 rows in set (0.01 sec)
+
+mysql> 
+----------------Delete the first two records of INVOICE_ITEM table its purchase quantity is high.----------------------------------------
+
+
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1004 |  131 |       20 |
+|   1005 |  132 |       20 |
+|   1005 |  131 |        4 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> delete from invoice_itemm order by quantity desc limit 2;
+Query OK, 2 rows affected (0.48 sec)
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
++--------+------+----------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
+
+-------------------------------------Delete the record of customer id ‘10001’.-----------------------------------------------------------
+
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|   10001 | raju   | chambatt       | tvm       | 872347422 |
++---------+--------+----------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> delete from cust where cust_id=10001;
+Query OK, 1 row affected (0.50 sec)
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
++---------+--------+----------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
