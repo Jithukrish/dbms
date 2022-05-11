@@ -22,7 +22,7 @@ mysql> select * from prdt;
 5 rows in set (0.00 sec)
 
 
-mysql> update prdt set price=15000 where p_name=iphone;
+mysql> update prdt set price=15000 where p_name='iphone';
 Query OK, 1 row affected (0.05 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -66,7 +66,7 @@ mysql> select*from cust;
 
 
 
-mysql> update cust set city='kozhikode' where city=clt;
+mysql> update cust set city='kozhikode' where city='clt';
 Query OK, 1 row affected (0.06 sec)
 Rows matched: 1  Changed: 1  Warnings: 0 
 
@@ -113,15 +113,15 @@ mysql> select*from cust;
 
 
 
-mysql> update cust set city='kollam' where name=arjun;
+mysql> update cust set city='kollam' where name=arjun; //WRONG
 Query OK, 1 row affected (0.05 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> update cust set address='vaduvanjal' where name=arjun;
+mysql> update cust set address='vaduvanjal' where name=arjun;//WRONG
 Query OK, 1 row affected (0.45 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> update cust set ph_no=974768368 where name=arjun;
+mysql> update cust set ph_no=974768368 where name=arjun;//WRONG
 Query OK, 1 row affected (0.46 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -225,4 +225,4 @@ mysql> select*from invoice_itemm;
 mysql> 
 
 
-
+//CORRECTION
