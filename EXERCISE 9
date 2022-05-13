@@ -1,0 +1,129 @@
+
+-----------------------------------------------------------EXPERIMENT 9--------------------------------------------------------------------
+
+1.      List the product name and quantity of invoice items.
+
+
+2.      Display invoice details of the transaction dated ’31-01-2022’.
+
+
+3.      Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+
+4.      Display all customer details and invoice details must include customer has not purchased items.
+-------------------------------------------------------QUESTION 1-----------------------------------------------------------------------
+mysql> SELECT * FROM prdt;
++------+-----------+----------+
+| p_id | p_name    | price    |
++------+-----------+----------+
+|  131 | iphone    | 15300.00 |
+|  132 | backcover |   102.00 |
+|  133 | chip      |    71.40 |
+|  134 | harddisk  |  7140.00 |
+|  135 | speaker   |  8160.00 |
+|  136 | soap      |    20.00 |
++------+-----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+------+
+| inv_id | p_id | qty  |
++--------+------+------+
+|    502 |  103 |    5 |
+|    501 |  101 |   10 |
+|    503 |  102 |    6 |
+|    501 |  104 |  100 |
+|    501 |  105 |   10 |
++--------+------+------+
+5 rows in set (0.03 sec)
+
+mysql> select prdt.p_name,invoice_itemm.quantity from prdt inner join invoice_itemm on prdt.p_id=invoice_itemm.p_id;
++-----------+----------+
+| p_name    | quantity |
++-----------+----------+
+| iphone    |        2 |
+| iphone    |        4 |
+| backcover |        5 |
+| chip      |        5 |
+| harddisk  |        6 |
+| speaker   |        6 |
++-----------+----------+
+6 rows in set (0.02 sec)
+
+--------------------------------------------QUESTION 2------------------------------------------------------------------------------------
+
+
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
+|   1006 |  132 |        5 |
+|   1007 |  133 |        5 |
+|   1008 |  134 |        6 |
+|   1008 |  135 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+mysql> select * from invoice_mas;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2022-01-31 |
+|   1005 |       2 | 2021-01-31 |
+|   1006 |       3 | 2022-01-31 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
+|   1009 |       6 | 2018-02-03 |
+|   1010 |       7 | 2021-01-31 |
++--------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select invoice_mas.inv_id,invoice_mas.inv_date,cust.name,prdt.p_name,invoice_itemm.quantity from invoice_mas inner join cust on invoice_mas.cust_id=cust.cust_id inner join invoice_itemm on invoice_mas.inv_id=invoice_itemm.inv_id inner join prdt on invoice_itemm.p_id=prdt.p_id where inv_date='2022-01-31';
++--------+------------+--------+-----------+----------+
+| inv_id | inv_date   | name   | p_name    | quantity |
++--------+------------+--------+-----------+----------+
+|   1004 | 2022-01-31 | arjun  | iphone    |        2 |
+|   1006 | 2022-01-31 | aleena | backcover |        5 |
++--------+------------+--------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> 
+--------------------------------------------------QUESTION 3-----------------------------------------------------------------------------
+
+
+
+mysql> select invoice_mas.inv_date,cust.name,prdt.p_name from invoice_mas innerjoin cust on invoice_mas.cust_id=cust.cust_id inner join invoice_itemm on invoice_mas.inv_id=invoice_itemm.inv_id inner join prdt on invoice_itemm.p_id=prdt.p_id where p_name='iphone';
++------------+-------+--------+
+| inv_date   | name  | p_name |
++------------+-------+--------+
+| 2022-01-31 | arjun | iphone |
+| 2021-01-31 | arun  | iphone |
++------------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> 
+-----------------------------------------------------QUESTION 4---------------------------------------------------------------------------
+
+mysql> select cust.name,invoice_mas.inv_id, invoice_mas.inv_date,prdt.p_name,invoice_itemm.quantity from invoice_mas left join cust on invoice_mas.cust_id=cust.cust_id left join invoice_itemm on invoice_mas.inv_id=invoice_itemm.inv_id inner join prdt on invoice_itemm.p_id=prdt.p_id;
++--------+--------+------------+-----------+----------+
+| name   | inv_id | inv_date   | p_name    | quantity |
++--------+--------+------------+-----------+----------+
+| arjun  |   1004 | 2022-01-31 | iphone    |        2 |
+| arun   |   1005 | 2021-01-31 | iphone    |        4 |
+| aleena |   1006 | 2022-01-31 | backcover |        5 |
+| george |   1007 | 2022-03-01 | chip      |        5 |
+| amal   |   1008 | 2022-03-31 | harddisk  |        6 |
+| amal   |   1008 | 2022-03-31 | speaker   |        6 |
++--------+--------+------------+-----------+----------+
+6 rows in set (0.00 sec)
+
+

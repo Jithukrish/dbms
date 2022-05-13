@@ -1,0 +1,183 @@
+SUBQUERY
+1. List the customer names of invoice date 3rd February 2018.
+2. List the product name and price of each invoice item.
+3. List the product names, only include their purchased quantity more than 3.
+4. Find the product that has no sale.
+5. List the customer names who purchased the items ‘pen’ and ‘pencil’.
+6. Display the purchased product details of the customer ’xyz’.
+7. List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------QUESTION 1-------------------------------------------------------------------------------
+
+mysql> select * from invoice_mas;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1004 |       1 | 2021-01-01 |
+|   1005 |       2 | 2022-01-03 |
+|   1006 |       3 | 2022-01-04 |
+|   1007 |       4 | 2022-03-01 |
+|   1008 |       5 | 2022-03-31 |
+|   1009 |       6 | 2018-02-03 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql> select name from cust where cust_id=(select cust_id from invoice_mas where inv_date='2018-02-03');
++--------+
+| name   |
++--------+
+| midhun |
++--------+
+1 row in set (0.00 sec)
+
+mysql> 
+-------------------------------------------------------QUESTION 2-------------------------------------------------------------------------
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
+|   1006 |  132 |        5 |
+|   1007 |  133 |        5 |
+|   1008 |  134 |        6 |
+|   1008 |  135 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select p_name,price from prdt where p_id in (select p_id from invoice_itemm);
++-----------+----------+
+| p_name    | price    |
++-----------+----------+
+| iphone    | 15300.00 |
+| backcover |   102.00 |
+| chip      |    71.40 |
+| harddisk  |  7140.00 |
+| speaker   |  8160.00 |
++-----------+----------+
+5 rows in set (0.01 sec)
+
+mysql> 
+
+
+-------------------------------------------------------QUESTION 3------------------------------------------------------------------------
+mysql> select * from prdt;
++------+-----------+----------+
+| p_id | p_name    | price    |
++------+-----------+----------+
+|  131 | iphone    | 15300.00 |
+|  132 | backcover |   102.00 |
+|  133 | chip      |    71.40 |
+|  134 | harddisk  |  7140.00 |
+|  135 | speaker   |  8160.00 |
+|  136 | soap      |    20.00 |
++------+-----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
+|   1006 |  132 |        5 |
+|   1007 |  133 |        5 |
+|   1008 |  134 |        6 |
+|   1008 |  135 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select p_name from prdt where p_id in (select p_id from invoice_itemm where quantity>3);
++-----------+
+| p_name    |
++-----------+
+| iphone    |
+| backcover |
+| chip      |
+| harddisk  |
+| speaker   |
++-----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+-------------------------------------------------QUESTION 4------------------------------------------------------------------------------
+mysql> select * from invoice_itemm;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   1004 |  131 |        2 |
+|   1005 |  131 |        4 |
+|   1006 |  132 |        5 |
+|   1007 |  133 |        5 |
+|   1008 |  134 |        6 |
+|   1008 |  135 |        6 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+mysql> select p_name from prdt where p_id in (select p_id from invoice_itemm where quantity>3);
++-----------+
+| p_name    |
++-----------+
+------------------------------------------QUESTION 5---------------------------------------------------------------------------------------
+
+
+mysql> select * from cust;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
+|       8 | AJUk   | kolla          | KODUVALLY |  53537946 |
+|       9 | AJmal  | kollas         | KODUVALLY |  33537946 |
+|      10 | Anzil  | koduva         | KODUVALLY |  33537996 |
++---------+--------+----------------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select name from cust where cust_id in(select cust_id from invoice_mas where inv_id in(select inv_id from invoice_itemm where p_id in( select p_id from prdt where p_name='iphone' or p_name='soap')));
+
++-------+
+| name  |
++-------+
+| arjun |
+| arun  |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> 
+---------------------------------------------------QUESTION 6-----------------------------------------------------------------------------
+
+Database changed
+mysql> select p_name,price from prdt where p_id in(select p_id from invoice_itemm where inv_id in(select inv_id from invoice_mas where cust_id in(select cust_id from cust where name="aleena")));
++-----------+--------+
+| p_name    | price  |
++-----------+--------+
+| backcover | 102.00 |
++-----------+--------+
+1 row in set (0.53 sec)
+
+mysql> 
+-----------------------------------------------QUESTION 7--------------------------------------------------------------------------------
+
+mysql> select name from cust where cust_id in(select cust_id from invoice_mas where inv_id in(select inv_id from invoice_itemm group by inv_id
+having count(inv_id)>=2));
++------+
+| name |
++------+
+| amal |
++------+
+1 row in set (0.00 sec)
+
+
+
