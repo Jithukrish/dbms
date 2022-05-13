@@ -126,4 +126,4 @@ mysql> select cust.name,invoice_mas.inv_id, invoice_mas.inv_date,prdt.p_name,inv
 +--------+--------+------------+-----------+----------+
 6 rows in set (0.00 sec)
 
-
+//VERIFIED
