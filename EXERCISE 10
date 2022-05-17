@@ -1,0 +1,73 @@
+
+----------------------------------------------EXERCISE 10-----------------------------------------------------------------------------------
+
+1.      
+Create
+a view for customers who have purchased products.
+
+
+2.      
+Create
+a view for invoice products[cname, , inv_id, product_id, quantity]
+
+
+
+
+--------------------------------------------------------QUESTION 1-------------------------------------------------------------------------
+
+
+
+
+
+
+Database changed
+mysql> create view purchaseproduct as select cust.*from cust inner join invoice_mas on cust.cust_id=invoice_mas.cust_id;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select * from purchaseproduct;
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
++---------+--------+----------------+-----------+-----------+
+7 rows in set (0.02 sec)
+
+mysql> 
+
+---------------------------------------------------QUESTION 2----------------------------------------------------------------------------
+
+mysql> create view invproduct as select cust.name,invoice_mas.inv_id, prdt.p_id,invoice_itemm.quantity from cust inner join invoice_mas on cust.cust_id=invoice_mas.cust_id inner join invoice_itemm on invoice_mas.inv_id=invoice_itemm.inv_id inner join prdt on prdt.p_id=invoice_itemm.p_id;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from invproduct;
++--------+--------+------+----------+
+| name   | inv_id | p_id | quantity |
++--------+--------+------+----------+
+| arjun  |   1004 |  131 |        2 |
+| arun   |   1005 |  131 |        4 |
+| aleena |   1006 |  132 |        5 |
+| george |   1007 |  133 |        5 |
+| amal   |   1008 |  134 |        6 |
+| amal   |   1008 |  135 |        6 |
++--------+--------+------+----------+
+6 rows in set (0.41 sec)
+
+mysql> 
+
+
+
+
+
+
+
+
+
+
+
+
