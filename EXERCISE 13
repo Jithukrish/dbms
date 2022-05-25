@@ -1,0 +1,82 @@
+----------------------------------------------------EXPERIMENT 13---------------------------------------------------------------------------
+TCL COMMANDS
+1. Commit
+2. Rollback
+3. Savepoint
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+mysql> create table STDU(roll int,id int);
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into STDU values(1,23);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from STDU;
++------+------+
+| roll | id   |
++------+------+
+|    1 |   23 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> savepoint A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into STDU values(2,24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into STDU values(3,25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from STDU;
++------+------+
+| roll | id   |
++------+------+
+|    1 |   23 |
+|    2 |   24 |
+|    3 |   25 |
++------+------+
+3 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from STDU;
++------+------+
+| roll | id   |
++------+------+
+|    1 |   23 |
+|    2 |   24 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from STDU;
++------+------+
+| roll | id   |
++------+------+
+|    1 |   23 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> 
+
