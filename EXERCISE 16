@@ -1,0 +1,147 @@
+16
+PL/SQL PROGRAMS – TRIGGERS
+
+
+1.      
+Create
+a trigger to handle updates to the customer table.
+
+
+2.      
+Create
+a trigger to handle inserts to the product relation ( if price < 5 the set
+price to 10).
+-------------------------------------QUESTION 1---------------------------------------------------------------------------------------------
+mysql> create table cust_nw(cust_id int,name varchar(10),address varchar(20),city varchar(10),ph_no int);
+    -> //
+Query OK, 0 rows affected (0.28 sec)
+
+
+
+
+mysql> CREATE TRIGGER OLDN BEFORE UPDATE ON cust
+    -> FOR EACH ROW
+    -> INSERT INTO cust_nw
+    -> VALUES (OLD.cust_id, OLD.name,OLD.address, OLD.city, OLD.ph_no);
+    -> END
+    -> //
+Query OK, 0 rows affected (0.10 sec)
+
+
+mysql> SELECT*FROM cust;
+    -> //
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | midhun | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
+|       8 | AJUk   | kolla          | KODUVALLY |  53537946 |
+|       9 | AJmal  | kollas         | KODUVALLY |  33537946 |
+|      10 | Anzil  | koduva         | KODUVALLY |  33537996 |
++---------+--------+----------------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> update cust set name='MIDHU' where NAME='midhun';//
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
+    -> //
++---------+--------+----------------+-----------+-----------+
+| cust_id | name   | address        | city      | ph_no     |
++---------+--------+----------------+-----------+-----------+
+|       1 | arjun  | kalamasseri    | kollam    | 976587863 |
+|       2 | arun   | vaduvanjal     | kozhikode | 976587823 |
+|       3 | aleena | mattathil      | tvm       | 974768368 |
+|       4 | george | puthiyaveettil | ekm       |  97754433 |
+|       5 | amal   | pottekkad      | kollam    | 974733789 |
+|       6 | MIDHU  | mattathil      | vavad     |      NULL |
+|       7 | AJU    | matta          | KODUVALLY |  93537946 |
+|       8 | AJUk   | kolla          | KODUVALLY |  53537946 |
+|       9 | AJmal  | kollas         | KODUVALLY |  33537946 |
+|      10 | Anzil  | koduva         | KODUVALLY |  33537996 |
++---------+--------+----------------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from cust_nw;
+    -> //
++---------+--------+-----------+-------+-------+
+| cust_id | name   | address   | city  | ph_no |
++---------+--------+-----------+-------+-------+
+|       6 | midhun | mattathil | vavad |  NULL |
+|       6 | midhun | mattathil | vavad |  NULL |
++---------+--------+-----------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> 
+---------------------------------------------------------QUESTION 2------------------------------------------------------------
+
+mysql> delimiter //
+mysql> CREATE TRIGGER PRODUCT_IN BEFORE INSERT ON prdt
+    -> FOR EACH ROW
+    -> IF NEW.PRICE <5 THEN
+    -> SET NEW.price=10;
+    -> END IF;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.12 sec)
+
+
+mysql> INSERT INTO prdt VALUES(11,'BOTILE',4);//
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from prdt;//
++------+-----------+----------+
+| p_id | p_name    | price    |
++------+-----------+----------+
+|   11 | BOTILE    |    10.00 |
+|  131 | iphone    | 15300.00 |
+|  132 | backcover |   102.00 |
+|  133 | chip      |    71.40 |
+|  134 | harddisk  |  7140.00 |
+|  135 | speaker   |  8160.00 |
+|  136 | soap      |    20.00 |
++------+-----------+----------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
